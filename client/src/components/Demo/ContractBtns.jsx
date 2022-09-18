@@ -11,9 +11,15 @@ function ContractBtns({ setValue }) {
     }
   };
 
-  const read = async () => {
-    const value = await contract.methods.read().call({ from: accounts[0] });
-    setValue(value);
+  const isClosed = async () => {
+    const value = await contract.methods.closed.call().call();
+    console.log(value);
+    if(value){
+      setValue('true');
+    }else{
+      setValue('false')
+    }
+    
   };
 
   const write = async e => {
@@ -31,8 +37,8 @@ function ContractBtns({ setValue }) {
   return (
     <div className="btns">
 
-      <button onClick={read}>
-        read()
+      <button onClick={isClosed}>
+        isClosed()
       </button>
 
       <div onClick={write} className="input-btn">
