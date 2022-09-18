@@ -15,23 +15,16 @@ function Contract({ value }) {
 
   return (
     <code>
-      {`contract SimpleStorage {
-  uint256 value = `}
+      {`closed : `}
 
       <span className="secondary-color" ref={spanEle}>
         <strong>{value}</strong>
-      </span>
+      </span><br />
+      {`Voters:{
 
-      {`;
+      }
 
-  function read() public view returns (uint256) {
-    return value;
-  }
-
-  function write(uint256 newValue) public {
-    value = newValue;
-  }
-}`}
+  `}
     </code>
   );
 }

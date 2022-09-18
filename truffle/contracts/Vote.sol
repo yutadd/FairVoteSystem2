@@ -35,7 +35,26 @@ contract Vote {
 		require(msg.sender == owner);
 			voter[_voter]=-1;
 	}
-
+    function getVoters() public view returns (address[] memory) {
+        return voterList;
+    }
+	function getVoterValues() public view returns (int[] memory){
+		int[] memory ret;
+		for(uint i=0;i<voterList.length;i++){
+			ret[i]=voter[voterList[i]];
+		}
+		return ret;
+	}
+	function getTargets() public view returns (uint[] memory) {
+        return targetList;
+    }
+	function getTargetValue() public view returns (uint[] memory){
+		uint[] memory ret;
+		for(uint i=0;i<targetList.length;i++){
+			ret[i]=target[targetList[i]];
+		}
+		return ret;
+	}
 	function vote(uint _target) public {
 		if (voter[msg.sender] == -1) {
 			bool _exist;

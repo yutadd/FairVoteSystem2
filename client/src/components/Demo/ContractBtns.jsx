@@ -6,7 +6,7 @@ function ContractBtns({ setValue }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = e => {
-    if (/^\d+$|^$/.test(e.target.value)) {
+    if (/(\d|[a-z])*/.test(e.target.value)) {
       setInputValue(e.target.value);
     }
   };
@@ -17,12 +17,23 @@ function ContractBtns({ setValue }) {
     if(value){
       setValue('true');
     }else{
-      setValue('false')
+      setValue('false');
     }
     
   };
-
-  const write = async e => {
+const close=async ()=>{
+  await contract.methods.close().send({from: accounts[0]});
+  alert('success');
+};
+const open=async ()=>{
+  await contract.methods.open().send({from: accounts[0]});
+  alert('success');
+};
+const getVoters=async()=>{
+let voter=await contract.methods.getVoters().call();
+console.log(voter);
+};
+  const addVoter = async e => {
     if (e.target.tagName === "INPUT") {
       return;
     }
@@ -30,18 +41,36 @@ function ContractBtns({ setValue }) {
       alert("Please enter a value to write.");
       return;
     }
-    const newValue = parseInt(inputValue);
-    await contract.methods.write(newValue).send({ from: accounts[0] });
+    //const newValue = parseInt(inputValue);
+    try{
+    await contract.methods.addVoter(inputValue).send({ from: accounts[0] });
+    alert('transaction completed!');
+    }catch(e){
+      if(e.code===4001){
+        alert('Cancelled');
+      }else if(e.code==='INVALID_ARGUMENT'){
+        alert('invalid address');
+      }else{
+        console.log('unknown error : '+e.code);
+      }
+    }
   };
 
   return (
     <div className="btns">
-
       <button onClick={isClosed}>
         isClosed()
       </button>
-
-      <div onClick={write} className="input-btn">
+      <button onClick={getVoters}>
+        getVoters()
+      </button>
+      <button onClick={open}>
+        open()
+      </button>
+      <button onClick={close}>
+        close()
+      </button>
+      <div onClick={addVoter} className="input-btn">
         write(<input
           type="text"
           placeholder="uint"
