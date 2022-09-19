@@ -1,11 +1,11 @@
 function Welcome() {
   return (
     <div className="welcome">
-      <h1>👋 Welcome to the Truffle + React Box!</h1>
+      <h1>Fair Vote System2</h1>
       <p>
-        This is everything you need to start using Truffle to write,
-        compile, test, and deploy smart contracts, and interact with
-        them from a React app.
+        This is transparency ensured voting system.
+        Please check MetaMask is installed on your browser.
+        auther is yutadd.<br /><a href="github.com/yutadd">yutadd on github.</a>
       </p>
     </div>
   );

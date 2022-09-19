@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-function Contract({ value }) {
+function Contract({ values }) {
   const spanEle = useRef(null);
 
   useEffect(() => {
@@ -11,20 +11,22 @@ function Contract({ value }) {
     return () => {
       clearTimeout(flash);
     };
-  }, [value]);
+  }, [values.closed]);
 
   return (
     <code>
       {`closed : `}
-
       <span className="secondary-color" ref={spanEle}>
-        <strong>{value}</strong>
-      </span><br />
-      {`Voters:{
-
-      }
-
-  `}
+        <strong>{values.closed}</strong>
+      </span>
+      <br />
+      {`Voters:{`}
+      {(values.voters = [{}] ? "[]" : values.voters)}
+      {`}`}
+      <br />
+      {`Voter[0]:{`}
+      {values.voter}
+      {`}`}
     </code>
   );
 }

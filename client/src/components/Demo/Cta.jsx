@@ -1,10 +1,9 @@
 function Cta() {
   return (
     <p>
-      Try changing&nbsp;
-      <span className="code">value</span>
-      &nbsp;in&nbsp;
-      <span className="code">SimpleStorage</span>.
+      You can vote if your address is { }
+      <span style={{fontWeight:'bold'}}>registered</span> { }
+      by the owner.
     </p>
   );
 }

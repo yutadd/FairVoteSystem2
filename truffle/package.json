@@ -6,7 +6,9 @@
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.0.10"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "2.7.1"
+  },
   "scripts": {
     "test": "truffle test"
   },
