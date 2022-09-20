@@ -12,22 +12,27 @@ function Contract({ values }) {
       clearTimeout(flash);
     };
   }, [values.closed]);
-
   return (
-    <code>
-      {`closed : `}
+    <div className="p-2 bd-highlight" style={{backgroundColor:'#eee',minWidth:'52rem'}}>
+      {`Station : `}
       <span className="secondary-color" ref={spanEle}>
         <strong>{values.closed}</strong>
       </span>
       <br />
       {`Voters:{`}
-      {(values.voters = [{}] ? "[]" : values.voters)}
+      <ul className="list-group">
+        {Object.entries(values.voters)
+      .map( ([key, value]) => <li className="list-group-item">{key+` : `+value}</li>)}
+      </ul>
       {`}`}
       <br />
-      {`Voter[0]:{`}
-      {values.voter}
+      {`Targets:{`}
+      <ul>
+        {Object.entries(values.targets)
+      .map( ([key, value]) => <li>{key+` : `+value}</li>)}
+      </ul>
       {`}`}
-    </code>
+    </div>
   );
 }
 

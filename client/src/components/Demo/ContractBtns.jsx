@@ -1,6 +1,7 @@
+/** @jsxImportSource @emotion/react */
 import { useState } from "react";
 import useEth from "../../contexts/EthContext/useEth";
-
+import { css , keyframes }  from '@emotion/react'
 function ContractBtns({ setValue }) {
   const {
     state: { contract, accounts },
@@ -10,21 +11,6 @@ function ContractBtns({ setValue }) {
   const handleInputChange = (e) => {
     if (/(1-z])*/.test(e.target.value)) {
       setInputValue(e.target.value);
-    }
-  };
-  var voters = [];
-  var closed = "?";
-  var voter = "0x0a";
-  const isClosed = async () => {
-    const value2 = await contract.methods.closed.call().call();
-    console.log(value2);
-
-    if (value2) {
-      setValue({ closed: "true", voters: voters, voter: voter });
-      closed = "true";
-    } else {
-      setValue({ closed: "false", voters: voters, voter: voter });
-      closed = "false";
     }
   };
   const close = async () => {
@@ -37,13 +23,25 @@ function ContractBtns({ setValue }) {
   };
   const getVoters = async () => {
     let i = await contract.methods.getVoterArrayLength().call();
-    const addresses = [];
+    const voters = {};
     for (var a = 0; a < i; a++) {
-      addresses[a] = await contract.methods.getVoterAddress(a).call();
+      let _add = await contract.methods.getVoterAddress(a).call();
+      let _targ = await contract.methods.getVotedTarget(_add).call();
+      voters[_add] = _targ;
     }
-    console.log(i);
-    console.log(addresses);
-    setValue({ closed: closed, voters: voters, voter: addresses });
+    let f = await contract.methods.getTargetArrayLength().call();
+    const targets = {};
+    for (var r = 0; r < f; r++) {
+      let _tid = await contract.methods.getTargetID(r).call();
+      let _targAmount = await contract.methods.getVotedTarget(_tid).call();
+      targets[_tid] = _targAmount;
+    }
+    const value2 = await contract.methods.closed.call().call();
+    if (value2) {
+      setValue({ closed: "opened", voters: voters, targets: targets });
+    } else {
+      setValue({ closed: "closed", voters: voters, targets: targets });
+    }
   };
   const addVoter = async (e) => {
     if (e.target.tagName === "INPUT") {
@@ -69,23 +67,38 @@ function ContractBtns({ setValue }) {
   };
 
   return (
-    <div className="btns">
-      <button onClick={isClosed}>isClosed()</button>
-      <button onClick={getVoters}>getVoters()</button>
-      <button onClick={open}>open()</button>
-      <button onClick={close}>close()</button>
-      <div onClick={addVoter} className="input-btn">
-        addVoters(
-        <input
-          type="text"
-          placeholder="uint"
-          value={inputValue}
-          onChange={handleInputChange}
-        />
-        )
-      </div>
-    </div>
+    <div className="p-2 bd-highlight">
+        <div className="d-flex flex-column bd-highlight" >
+        <button className="btn btn-info" css={styles.callButton} onClick={getVoters}>
+          getStats()
+        </button>
+        <button className="btn btn-warning" css={styles.callButton} onClick={open} >open()</button>
+        <button className="btn btn-warning" css={styles.callButton} onClick={close} >close()</button>
+        <button
+          onClick={addVoter}
+          className="btn btn-warning input-btn"
+          css={styles.callButton}
+        >
+          addVoters(
+          <input
+            type="text"
+            placeholder="address here"
+            value={inputValue}
+            css={styles.ButtonPhldr}
+            onChange={handleInputChange}
+          />
+          )
+          </button>
+        </div>
+        </div>
   );
 }
-
+const styles={
+  callButton:{
+    'fontSize':'1.5rem',
+    'color':'#000',
+    'margin':'5px'
+  }
+  
+}
 export default ContractBtns;
