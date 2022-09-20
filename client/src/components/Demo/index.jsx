@@ -21,9 +21,9 @@ function Demo() {
       <Cta />
       <div className="contract-container">
         <Contract values={values} />
-        </div>
-        <ContractBtns setValue={setValue} />
-      
+      </div>
+      <ContractBtns setValue={setValue} />
+
       <Desc />
     </>
   );
