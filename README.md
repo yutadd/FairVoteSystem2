@@ -4,6 +4,12 @@ This box comes with everything you need to start using Truffle to write, compile
 
 ## Installation
 
++-- create-next-app@12.3.0
++-- create-react-app@5.0.1
++-- ganache@7.4.3
++-- truffle@5.5.30
+`-- yarn@1.22.19
+
 First ensure you are in an empty directory.
 
 Run the `unbox` command using 1 of 2 ways.
