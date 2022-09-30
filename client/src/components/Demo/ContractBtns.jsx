@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
 import useEth from "../../contexts/EthContext/useEth";
-import { css , keyframes }  from '@emotion/react'
+import { css, keyframes } from "@emotion/react";
 function ContractBtns({ setValue }) {
   const {
     state: { contract, accounts },
@@ -68,12 +68,28 @@ function ContractBtns({ setValue }) {
 
   return (
     <div className="p-2 bd-highlight">
-        <div className="d-flex flex-column bd-highlight" >
-        <button className="btn btn-info" css={styles.callButton} onClick={getVoters}>
+      <div className="d-flex flex-column bd-highlight">
+        <button
+          className="btn btn-info"
+          css={styles.callButton}
+          onClick={getVoters}
+        >
           getStats()
         </button>
-        <button className="btn btn-warning" css={styles.callButton} onClick={open} >open()</button>
-        <button className="btn btn-warning" css={styles.callButton} onClick={close} >close()</button>
+        <button
+          className="btn btn-warning"
+          css={styles.callButton}
+          onClick={open}
+        >
+          open()
+        </button>
+        <button
+          className="btn btn-warning"
+          css={styles.callButton}
+          onClick={close}
+        >
+          close()
+        </button>
         <button
           onClick={addVoter}
           className="btn btn-warning input-btn"
@@ -88,17 +104,16 @@ function ContractBtns({ setValue }) {
             onChange={handleInputChange}
           />
           )
-          </button>
-        </div>
-        </div>
+        </button>
+      </div>
+    </div>
   );
 }
-const styles={
-  callButton:{
-    'fontSize':'1.5rem',
-    'color':'#000',
-    'margin':'5px'
-  }
-  
-}
+const styles = {
+  callButton: {
+    fontSize: "1.5rem",
+    color: "#000",
+    margin: "5px",
+  },
+};
 export default ContractBtns;

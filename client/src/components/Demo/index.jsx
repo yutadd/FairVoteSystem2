@@ -8,7 +8,7 @@ import ContractBtns from "./ContractBtns";
 import Desc from "./Desc";
 import NoticeNoArtifact from "./NoticeNoArtifact";
 import NoticeWrongNetwork from "./NoticeWrongNetwork";
-import { css , keyframes }  from '@emotion/react'
+import { css, keyframes } from "@emotion/react";
 function Demo() {
   const { state } = useEth();
   const [values, setValue] = useState({
@@ -21,12 +21,11 @@ function Demo() {
     <>
       <Cta />
       <div className="container">
-      <div className="d-flex flex-row bd-highlight mb-1">
-        <ContractBtns setValue={setValue} />
-        <Contract values={values} />
+        <div className="d-flex flex-row bd-highlight mb-1">
+          <ContractBtns setValue={setValue} />
+          <Contract values={values} />
+        </div>
       </div>
-      </div>
-      
 
       <Desc />
     </>
@@ -45,7 +44,5 @@ function Demo() {
     </div>
   );
 }
-const styles={
-
-}
+const styles = {};
 export default Demo;

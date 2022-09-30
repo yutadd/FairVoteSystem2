@@ -1,0 +1,106 @@
+@media (min-width: 500px) {
+  .start-container {
+    min-width: 100vw;
+    min-height: 70vh;
+  }
+  .background {
+    background: linear-gradient(to right, blue, #004);
+  }
+  .logo {
+    max-height: 6vh;
+  }
+  .no-line-warp {
+    white-space: nowrap;
+  }
+  .admin-button {
+    padding-top: 16px;
+    color: white;
+    text-decoration: none;
+    padding-left: 17px;
+  }
+  .admin-button>.btn{
+    font-size:2vh;
+    --bs-btn-font-size:2vh;
+  }
+  .menu-element {
+    height: 7vh;
+  }
+  .menu-link {
+    padding-left: 6px;
+    color: white;
+    font-size: 5vh;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px whitesmoke;
+  }
+  .menu-element:hover {
+    color: #005;
+  }
+
+  .inline {
+    vertical-align: super;
+    display: inline;
+  }
+  .center {
+    text-align: center;
+  }
+  .left {
+    height: 50vh;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 50vw;
+  }
+  .discription {
+    height: 50%;
+    display: block;
+    padding-left: 9%;
+    padding-top:5%;
+  }
+  .discription-title {
+    color: white;
+    font-weight: bold;
+    font-size: 5vh;
+  }
+  .discription-text {
+    color: white;
+    font-weight: lighter;
+    font-size: 3vh;
+  }
+
+  .btn-container {
+    height: 50%;
+    display: block;
+    padding-left:9%;
+  }
+  .btn-main {
+    padding-top: 15%;
+  }
+  .v-btn-text {
+    color: white;
+    font-size: 3vh;
+    text-decoration: none;
+  }
+  .btn-explanation{
+    color: white;
+    font-size: 1.5vh;
+    text-decoration: none;
+    display:inline-block;
+    padding-top: 4%;
+  }
+  .right {
+    vertical-align: top;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 50vw;
+  }
+  .sample-img {
+    transform   : perspective(150px)  /* 深さ */
+                rotateY(-2deg);     /* 角度 */
+    vertical-align: top;
+    
+filter: drop-shadow(30px 40px 4px #160baa);
+
+    width: 90%;
+    height: auto;
+  }
+}
