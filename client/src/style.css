@@ -94,12 +94,10 @@
     width: 50vw;
   }
   .sample-img {
-    transform   : perspective(150px)  /* 深さ */
+    transform   : perspective(18vh)  /* 深さ */
                 rotateY(-2deg);     /* 角度 */
     vertical-align: top;
-    
-filter: drop-shadow(30px 40px 4px #160baa);
-
+filter: drop-shadow(2vh 3vh 2.3vh #04021d);
     width: 90%;
     height: auto;
   }
