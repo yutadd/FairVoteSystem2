@@ -18,9 +18,9 @@
     text-decoration: none;
     padding-left: 17px;
   }
-  .admin-button>.btn{
-    font-size:2vh;
-    --bs-btn-font-size:2vh;
+  .admin-button > .btn {
+    font-size: 2vh;
+    --bs-btn-font-size: 2vh;
   }
   .menu-element {
     height: 7vh;
@@ -54,7 +54,7 @@
     height: 50%;
     display: block;
     padding-left: 9%;
-    padding-top:5%;
+    padding-top: 5%;
   }
   .discription-title {
     color: white;
@@ -70,7 +70,7 @@
   .btn-container {
     height: 50%;
     display: block;
-    padding-left:9%;
+    padding-left: 9%;
   }
   .btn-main {
     padding-top: 15%;
@@ -80,11 +80,11 @@
     font-size: 3vh;
     text-decoration: none;
   }
-  .btn-explanation{
+  .btn-explanation {
     color: white;
     font-size: 1.5vh;
     text-decoration: none;
-    display:inline-block;
+    display: inline-block;
     padding-top: 4%;
   }
   .right {
@@ -94,10 +94,9 @@
     width: 50vw;
   }
   .sample-img {
-    transform   : perspective(18vh)  /* 深さ */
-                rotateY(-2deg);     /* 角度 */
+    transform: perspective(18vh) /* 深さ */ rotateY(-2deg); /* 角度 */
     vertical-align: top;
-filter: drop-shadow(2vh 3vh 2.3vh #04021d);
+    filter: drop-shadow(2vh 3vh 2.3vh #04021d);
     width: 90%;
     height: auto;
   }
