@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Web3 from "web3";
 import { useEffect } from "react";
-import { css, keyframes } from "@emotion/react";
 function ContractBtns({ setValue }) {
   let address, contract,accounts;
   const init = async () => {
@@ -37,7 +36,7 @@ function ContractBtns({ setValue }) {
     init();
     setTimeout(() => {
       console.log(contract);
-      const doe=async ()=>{await contract.methods.close().send({ from: accounts[0] });alert("success");};
+      const doe=async ()=>{let suc=await contract.methods.close().send({ from: accounts[0] });alert("success:"+suc);};
       doe();
     }, 1000);
   };
@@ -45,7 +44,7 @@ function ContractBtns({ setValue }) {
     init();
     setTimeout(() => {
       console.log(contract);
-      const doe=async ()=>{await contract.methods.open().send({ from: accounts[0] });alert("success");};
+      const doe=async ()=>{let suc=await contract.methods.open().send({ from: accounts[0] });alert("success:"+suc);};
       doe();
     }, 1000);
     
@@ -86,7 +85,7 @@ function ContractBtns({ setValue }) {
       }
       //const newValue = parseInt(inputValue);
       try {
-        await contract.methods.addVoter(inputValue).send({ from: accounts[0] });
+        let suc=await contract.methods.addVoter(inputValue).send({ from: accounts[0] });
         alert("transaction completed!");
       } catch (e) {
         if (e.code === 4001) {

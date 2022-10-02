@@ -50,7 +50,7 @@ contract Vote {
 	function getTargetDisplay(uint _index) public view returns(string memory){
 		return targetList[_index];
 	}
-	function addVoter(address _voter) public {
+	function addVoter(address _voter) public{
 		require(msg.sender == owner);
 			voterList.push(_voter);
 			voter[_voter]="";

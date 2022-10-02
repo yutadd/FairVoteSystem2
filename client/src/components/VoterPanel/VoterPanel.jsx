@@ -27,7 +27,7 @@ export const VoterPanel = () => {
     console.log("inited contract");
     setTimeout(() => {
       getTargets();
-    }, 500);
+    }, 1000);
   },[]);
   const getTargets = async () => {
     let i=await contract.methods.getTargetArrayLength().call();
