@@ -1,17 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
-import useEth from "../../contexts/EthContext/useEth";
-import Title from "./Title";
-import Cta from "./Cta";
 import Contract from "./Contract";
 import ContractBtns from "./ContractBtns";
-import Desc from "./Desc";
-import NoticeNoArtifact from "./NoticeNoArtifact";
-import NoticeWrongNetwork from "./NoticeWrongNetwork";
-import { css, keyframes } from "@emotion/react";
 function Demo() {
-  const { state } = useEth();
-  const [values, setValue] = useState({
+const [values, setValue] = useState({
     closed: "?",
     voters: {},
     targets: {},
@@ -19,7 +11,6 @@ function Demo() {
 
   const demo = (
     <>
-      <Cta />
       <div className="container">
         <div className="d-flex flex-row bd-highlight mb-1">
           <ContractBtns setValue={setValue} />
@@ -27,20 +18,25 @@ function Demo() {
         </div>
       </div>
 
-      <Desc />
+      <span style={{ fontSize: "3.5rem", fontWeight: "bold" }}>1.</span>
+      <span style={{ fontSize: "2.5rem" }}>Add all voters</span>
+      <br />
+      <span style={{ fontSize: "3.5rem", fontWeight: "bold" }}>2.</span>
+      <span style={{ fontSize: "2.5rem" }}>open</span>
     </>
   );
 
   return (
     <div className="demo">
-      <Title />
-      {!state.artifact ? (
-        <NoticeNoArtifact />
-      ) : !state.contract ? (
-        <NoticeWrongNetwork />
-      ) : (
+      <h2>Controll-panel</h2>
+      <p>
+        Voter only who {}
+        <span style={{ fontWeight: "bold" }}>registered</span> {}
+        by the owner can vote.
+      </p>
+      {
         demo
-      )}
+      }
     </div>
   );
 }

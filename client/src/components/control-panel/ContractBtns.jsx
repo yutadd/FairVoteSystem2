@@ -1,11 +1,31 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
-import useEth from "../../contexts/EthContext/useEth";
+import Web3 from "web3";
+import { useEffect } from "react";
 import { css, keyframes } from "@emotion/react";
 function ContractBtns({ setValue }) {
-  const {
-    state: { contract, accounts },
-  } = useEth();
+  let address, contract,accounts;
+  const init = async () => {
+    const artifact = require("../../contracts/Vote.json");
+    const { abi } = artifact;
+    const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+    accounts = await web3.eth.requestAccounts();
+    const networkID = await web3.eth.net.getId();
+    try {
+      address = artifact.networks[networkID].address;
+      contract = new web3.eth.Contract(abi, address);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    init();
+   setInterval(() => {
+    getVoters();
+    const doe=async ()=>{let i=await contract.methods.getVoterArrayLength().call();};
+    doe();
+   }, 1000);
+  },[]);
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e) => {
@@ -14,12 +34,21 @@ function ContractBtns({ setValue }) {
     }
   };
   const close = async () => {
-    await contract.methods.close().send({ from: accounts[0] });
-    alert("success");
+    init();
+    setTimeout(() => {
+      console.log(contract);
+      const doe=async ()=>{await contract.methods.close().send({ from: accounts[0] });alert("success");};
+      doe();
+    }, 1000);
   };
   const open = async () => {
-    await contract.methods.open().send({ from: accounts[0] });
-    alert("success");
+    init();
+    setTimeout(() => {
+      console.log(contract);
+      const doe=async ()=>{await contract.methods.open().send({ from: accounts[0] });alert("success");};
+      doe();
+    }, 1000);
+    
   };
   const getVoters = async () => {
     let i = await contract.methods.getVoterArrayLength().call();
@@ -32,38 +61,44 @@ function ContractBtns({ setValue }) {
     let f = await contract.methods.getTargetArrayLength().call();
     const targets = {};
     for (var r = 0; r < f; r++) {
-      let _tid = await contract.methods.getTargetID(r).call();
-      let _targAmount = await contract.methods.getVotedTarget(_tid).call();
-      targets[_tid] = _targAmount;
+      let _tst = await contract.methods.getTargetDisplay(r).call();
+      let _targAmount = await contract.methods.getAmountOfVotes(_tst).call();
+      targets[_tst] = _targAmount;
     }
     const value2 = await contract.methods.closed.call().call();
-    if (value2) {
+    if (value2==='true') {
       setValue({ closed: "opened", voters: voters, targets: targets });
     } else {
       setValue({ closed: "closed", voters: voters, targets: targets });
     }
   };
   const addVoter = async (e) => {
-    if (e.target.tagName === "INPUT") {
-      return;
-    }
-    if (inputValue === "") {
-      alert("Please enter a value to write.");
-      return;
-    }
-    //const newValue = parseInt(inputValue);
-    try {
-      await contract.methods.addVoter(inputValue).send({ from: accounts[0] });
-      alert("transaction completed!");
-    } catch (e) {
-      if (e.code === 4001) {
-        alert("Cancelled");
-      } else if (e.code === "INVALID_ARGUMENT") {
-        alert("invalid address");
-      } else {
-        console.log("unknown error : " + e.code);
+    init();
+    setTimeout(() => {
+      console.log(contract);
+      const doe=async ()=>{
+        if (e.target.tagName === "INPUT") {
+        return;
       }
-    }
+      if (inputValue === "") {
+        alert("Please enter a value to write.");
+        return;
+      }
+      //const newValue = parseInt(inputValue);
+      try {
+        await contract.methods.addVoter(inputValue).send({ from: accounts[0] });
+        alert("transaction completed!");
+      } catch (e) {
+        if (e.code === 4001) {
+          alert("Cancelled");
+        } else if (e.code === "INVALID_ARGUMENT") {
+          alert("invalid address");
+        } else {
+          console.log("unknown error : " + e.code);
+        }
+      }};
+      doe();
+    }, 1000);
   };
 
   return (
@@ -72,9 +107,9 @@ function ContractBtns({ setValue }) {
         <button
           className="btn btn-info"
           css={styles.callButton}
-          onClick={getVoters}
+          disabled
         >
-          getStats()
+          getStats()&lt;=auto call
         </button>
         <button
           className="btn btn-warning"
