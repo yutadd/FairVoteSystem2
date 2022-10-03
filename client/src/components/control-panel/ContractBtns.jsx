@@ -26,10 +26,16 @@ function ContractBtns({ setValue }) {
    }, 1000);
   },[]);
   const [inputValue, setInputValue] = useState("");
-
   const handleInputChange = (e) => {
-    if (/(1-z])*/.test(e.target.value)) {
+    if (/(^[0-9a-fA-FxX]+$)|^$/.test(e.target.value)) {
       setInputValue(e.target.value);
+      console.log('not invalid');
+    }
+  };
+  const [inputValue2, setInputValue2] = useState("");
+  const handleInputChange2 = (e) => {
+    if (/(^[0-9a-zA-z\s]+$)|^$/.test(e.target.value)) {
+      setInputValue2(e.target.value);
     }
   };
   const close = async () => {
@@ -66,9 +72,9 @@ function ContractBtns({ setValue }) {
     }
     const value2 = await contract.methods.closed.call().call();
     if (value2==='true') {
-      setValue({ closed: "opened", voters: voters, targets: targets });
-    } else {
       setValue({ closed: "closed", voters: voters, targets: targets });
+    } else {
+      setValue({ closed: "opened", voters: voters, targets: targets });
     }
   };
   const addVoter = async (e) => {
@@ -86,6 +92,34 @@ function ContractBtns({ setValue }) {
       //const newValue = parseInt(inputValue);
       try {
         let suc=await contract.methods.addVoter(inputValue).send({ from: accounts[0] });
+        alert("transaction completed!");
+      } catch (e) {
+        if (e.code === 4001) {
+          alert("Cancelled");
+        } else if (e.code === "INVALID_ARGUMENT") {
+          alert("invalid address");
+        } else {
+          console.log("unknown error : " + e.code);
+        }
+      }};
+      doe();
+    }, 1000);
+  };
+  const addTarget = async (e) => {
+    init();
+    setTimeout(() => {
+      console.log(contract);
+      const doe=async ()=>{
+        if (e.target.tagName === "INPUT") {
+        return;
+      }
+      if (inputValue2 === "") {
+        alert("Please enter a value to write.");
+        return;
+      }
+      //const newValue = parseInt(inputValue);
+      try {
+        let suc=await contract.methods.addTarget(inputValue2).send({ from: accounts[0] });
         alert("transaction completed!");
       } catch (e) {
         if (e.code === 4001) {
@@ -136,6 +170,21 @@ function ContractBtns({ setValue }) {
             value={inputValue}
             css={styles.ButtonPhldr}
             onChange={handleInputChange}
+          />
+          )
+        </button>
+        <button
+          onClick={addTarget}
+          className="btn btn-warning input-btn"
+          css={styles.callButton}
+        >
+          addTarget(
+          <input
+            type="text"
+            placeholder="displayName"
+            value={inputValue2}
+            css={styles.ButtonPhldr}
+            onChange={handleInputChange2}
           />
           )
         </button>

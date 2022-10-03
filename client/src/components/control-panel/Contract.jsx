@@ -31,9 +31,9 @@ function Contract({ values }) {
       {`}`}
       <br />
       {`Targets:{`}
-      <ul>
+      <ul className="list-group">
         {Object.entries(values.targets).map(([key, value]) => (
-          <li>{key + ` : ` + value}</li>
+          <li className="list-group-item">{key + ` : ` + value}</li>
         ))}
       </ul>
       {`}`}
