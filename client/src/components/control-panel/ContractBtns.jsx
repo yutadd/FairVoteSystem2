@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Web3 from "web3";
 import { useEffect } from "react";
-const state = { error: null };
 function ContractBtns({ setValue }) {
     let address, contract, accounts;
     const state = { error: null };
@@ -11,6 +10,7 @@ function ContractBtns({ setValue }) {
         const { abi } = artifact;
         const web3 = null;
         try {
+            window.ethereum.request({ method: "eth_requestAccounts" });// Popup notify when metamask is not connected.
             web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
             accounts = await web3.eth.requestAccounts();
         } catch (err) {
@@ -20,8 +20,13 @@ function ContractBtns({ setValue }) {
         }
         if (!state.error) {
             const networkID = await web3.eth.net.getId();
+            try{
             address = artifact.networks[networkID].address;
             contract = new web3.eth.Contract(abi, address);
+        }catch(e){
+            alert('Excuse me sir, didn\'t you set metamask to wrong chain?');
+            state.error='error2'
+        }
         }
     };
     useEffect(() => {
