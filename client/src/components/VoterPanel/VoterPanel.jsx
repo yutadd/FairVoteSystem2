@@ -19,7 +19,7 @@ export const VoterPanel = () => {
       address = artifact.networks[networkID].address;
       contract = new web3.eth.Contract(abi, address);
     } catch (err) {
-      console.error(err);
+      alert("Sorry sir. But,contract seems not deployed yet. Could you please check it out?");
     }
   };
   useEffect(() => {
