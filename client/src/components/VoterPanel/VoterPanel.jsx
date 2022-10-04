@@ -7,27 +7,40 @@ import { useEffect } from "react";
 
 export const VoterPanel = () => {
    let address, contract;
+   const state = { error: null };
    const cards=<></>;
   const init = async () => {
     const artifact = require("../../contracts/Vote.json");
     const { abi } = artifact;
-    const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-    const accounts = await web3.eth.requestAccounts();
-    const networkID = await web3.eth.net.getId();
+    const web3=null;
+    try{
+      window.ethereum.request({ method: "eth_requestAccounts" })// Popup notify when metamask is not connected.
 
+    web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+    const accounts = await web3.eth.requestAccounts();
+  } catch (err) {
+    alert('Sorry sir, Can\'t init metamask or some web3 extension. Did you install it?');
+    console.log('error '+ err.message+' happen');
+    state.error = 'error';
+}
+    
+if(!state.error){
     try {
+      const networkID = await web3.eth.net.getId();
       address = artifact.networks[networkID].address;
       contract = new web3.eth.Contract(abi, address);
     } catch (err) {
-      alert("Sorry sir. But,contract seems not deployed yet. Could you please check it out?");
+      alert('\'Vote contract\' not found: Sorry, did you set your metamask to the wrong chain?');
     }
+  }
   };
   useEffect(() => {
     init();
-    console.log("inited contract");
+    if(!state.error){
     setTimeout(() => {
       getTargets();
     }, 1000);
+  }
   },[]);
   const getTargets = async () => {
     let i=await contract.methods.getTargetArrayLength().call();
