@@ -15,7 +15,6 @@ export const VoterPanel = () => {
     const web3=null;
     try{
       window.ethereum.request({ method: "eth_requestAccounts" })// Popup notify when metamask is not connected.
-
     web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
     const accounts = await web3.eth.requestAccounts();
   } catch (err) {
