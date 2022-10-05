@@ -12,7 +12,7 @@ export const VoterPanel = () => {
   const init = async () => {
     const artifact = require("../../contracts/Vote.json");
     const { abi } = artifact;
-    const web3=null;
+    let web3=null;
     try{
       window.ethereum.request({ method: "eth_requestAccounts" })// Popup notify when metamask is not connected.
     web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
@@ -22,7 +22,6 @@ export const VoterPanel = () => {
     console.log('error '+ err.message+' happen');
     state.error = 'error';
 }
-    
 if(!state.error){
     try {
       const networkID = await web3.eth.net.getId();
@@ -30,6 +29,8 @@ if(!state.error){
       contract = new web3.eth.Contract(abi, address);
     } catch (err) {
       alert('\'Vote contract\' not found: Sorry, did you set your metamask to the wrong chain?');
+      console.log('error '+ err.message+' happen');
+      state.error='error';
     }
   }
   };
@@ -60,8 +61,7 @@ if(!state.error){
       </div></>;
     }
   };
-  return (
-<>
+  return (<>
       <div className="start-container background ">
         <a className="menu-link" aria-current="page" href="#">
           <img className="logo" src="/logo2.png" />

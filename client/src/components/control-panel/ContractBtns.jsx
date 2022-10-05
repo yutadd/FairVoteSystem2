@@ -8,7 +8,7 @@ function ContractBtns({ setValue }) {
     const init = async () => {
         const artifact = require("../../contracts/Vote.json");
         const { abi } = artifact;
-        const web3 = null;
+        let web3 = null;
         try {
             window.ethereum.request({ method: "eth_requestAccounts" });// Popup notify when metamask is not connected.
             web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
