@@ -17,12 +17,17 @@ const [values, setValue] = useState({
           <Contract values={values} />
         </div>
       </div>
-
       <span style={{ fontSize: "3.5rem", fontWeight: "bold" }}>1.</span>
-      <span style={{ fontSize: "2.5rem" }}>Add all voters</span>
+      <span style={{ fontSize: "2.5rem" }}>Add all voter(address) address to contract.</span>
       <br />
       <span style={{ fontSize: "3.5rem", fontWeight: "bold" }}>2.</span>
-      <span style={{ fontSize: "2.5rem" }}>open</span>
+      <span style={{ fontSize: "2.5rem" }}>add Target(Any)</span>
+      <br />
+      <span style={{ fontSize: "3.5rem", fontWeight: "bold" }}>3.</span>
+      <span style={{ fontSize: "2.5rem" }}>Send private key to voter.</span>
+      <br />
+      <span style={{ fontSize: "3.5rem", fontWeight: "bold" }}>3.</span>
+      <span style={{ fontSize: "2.5rem" }}>call open() method.</span>
     </>
   );
 
@@ -40,5 +45,4 @@ const [values, setValue] = useState({
     </div>
   );
 }
-const styles = {};
 export default Demo;

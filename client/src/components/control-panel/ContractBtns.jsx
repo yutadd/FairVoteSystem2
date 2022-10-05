@@ -54,7 +54,21 @@ const close = async () => {
     init();
     setTimeout(() => {
         console.log(contract);
-        const doe = async () => { let suc = await contract.methods.close().send({ from: accounts[0] }); alert("success:" + suc); };
+        const doe = async () => { 
+            let suc;
+            try{
+                suc = await contract.methods.close().send({ from: accounts[0] });
+            } catch (e) {
+            if (e.code === 4001) {
+                alert("Cancelled");
+            } else if (e.code === "INVALID_ARGUMENT") {
+                alert("invalid address");
+            } else {
+                console.log("unknown error : " + e.code);
+            }
+             alert("success:" + suc); 
+            };
+        };
         doe();
     }, 1000);
 };
@@ -62,14 +76,26 @@ const open = async () => {
     init();
     setTimeout(() => {
         console.log(contract);
-        const doe = async () => { let suc = await contract.methods.open().send({ from: accounts[0] }); alert("success:" + suc); };
+        const doe = async () => { 
+            let suc;
+            try{
+            suc= await contract.methods.open().send({ from: accounts[0] }); alert("success:" + suc);} catch (e) {
+            if (e.code === 4001) {
+                alert("Cancelled");
+            } else if (e.code === "INVALID_ARGUMENT") {
+                alert("invalid address");
+            } else {
+                console.log("unknown error : " + e.code);
+            }
+             alert("success:" + suc); 
+            };
+         };
         doe();
     }, 1000);
 
 };
 const getVoters = async () => {
     let i = await contract.methods.getVoterArrayLength().call();
-
     const voters = {};
     for (var a = 0; a < i; a++) {
         let _add = await contract.methods.getVoterAddress(a).call();
@@ -103,8 +129,9 @@ const addVoter = async (e) => {
                 return;
             }
             //const newValue = parseInt(inputValue);
+            let suc;
             try {
-                let suc = await contract.methods.addVoter(inputValue).send({ from: accounts[0] });
+                suc = await contract.methods.addVoter(inputValue).send({ from: accounts[0] });
                 alert("transaction completed!");
             } catch (e) {
                 if (e.code === 4001) {
@@ -115,6 +142,7 @@ const addVoter = async (e) => {
                     console.log("unknown error : " + e.code);
                 }
             }
+            alert("success:" + suc); 
         };
         doe();
     }, 1000);
@@ -132,8 +160,9 @@ const addTarget = async (e) => {
                 return;
             }
             //const newValue = parseInt(inputValue);
+            let suc;
             try {
-                let suc = await contract.methods.addTarget(inputValue2).send({ from: accounts[0] });
+                suc = await contract.methods.addTarget(inputValue2).send({ from: accounts[0] });
                 alert("transaction completed!");
             } catch (e) {
                 if (e.code === 4001) {
@@ -144,6 +173,7 @@ const addTarget = async (e) => {
                     console.log("unknown error : " + e.code);
                 }
             }
+            alert("success:" + suc); 
         };
         doe();
     }, 1000);

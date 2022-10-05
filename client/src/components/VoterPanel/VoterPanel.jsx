@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
+import { Component, useState } from "react";
 import Web3 from "web3";
 
 import "./style.css";
@@ -8,7 +8,7 @@ import { useEffect } from "react";
 export const VoterPanel = () => {
    let address, contract;
    const state = { error: null };
-   const cards=<></>;
+   var list=[];
   const init = async () => {
     const artifact = require("../../contracts/Vote.json");
     const { abi } = artifact;
@@ -36,31 +36,33 @@ if(!state.error){
   };
   useEffect(() => {
     init();
-    if(!state.error){
     setTimeout(() => {
-      getTargets();
-    }, 1000);
-  }
+      const th=async ()=>{
+        console.log(contract);
+       let i=await contract.methods.getTargetArrayLength().call();
+       console.log(i);
+       for(var a=0;a<i;a++){
+       const target=await contract.methods.getTargetDisplay(0).call();
+       console.log(target);
+       list.push(<><div class="col-sm-4">
+       <div class="card">
+         <div class="card-body">
+           <h5 class="card-title">Special title treatment</h5>
+           <p class="card-text">
+             With supporting text below as a natural lead-in to additional
+             content.
+           </p>
+           <a href="#" class="btn btn-primary">
+             {target}
+           </a>
+         </div>
+       </div>
+       </div></>);}
+     };
+     th();
+     console.log(list);
+    },1000);
   },[]);
-  const getTargets = async () => {
-    let i=await contract.methods.getTargetArrayLength().call();
-    for(var a=0;a<i;a++){
-      cards[a]=<><div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">
-            With supporting text below as a natural lead-in to additional
-            content.
-          </p>
-          <a href="#" class="btn btn-primary">
-            Go somewhere
-          </a>
-        </div>
-      </div>
-      </div></>;
-    }
-  };
   return (<>
       <div className="start-container background ">
         <a className="menu-link" aria-current="page" href="#">
@@ -73,8 +75,8 @@ if(!state.error){
           </a>
         </div>
       </div>
-      <div >
-        {cards}
+      <div>
+      {list.map(num=> <Component>{num}</Component>)}
       </div>
       </>
   );
