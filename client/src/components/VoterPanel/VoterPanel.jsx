@@ -50,7 +50,28 @@ if(!state.error){
               console.log("unknown error : " + e.code);
           }
       }
-      alert("success:" + suc); 
+      alert("Voted to "+e); 
+  };
+  doe();
+  }
+  const revote=async (e)=>{
+    init();
+    const doe = async () => {
+      let suc;
+      try {
+          suc = await contract.methods.revote(e).send({ from: accounts[0] });
+          alert("transaction completed!");
+          console.log(suc)
+      } catch (e) {
+          if (e.code === 4001) {
+              alert("Cancelled");
+          } else if (e.code === "INVALID_ARGUMENT") {
+              alert("invalid address");
+          } else {
+              console.log("unknown error : " + e.code);
+          }
+      }
+      alert("reVoted to "+e); 
   };
   doe();
   }
@@ -65,7 +86,26 @@ if(!state.error){
        for(var a=0;a<i;a++){
        const target=await contract.methods.getTargetDisplay(a).call();
        const amount= await contract.methods.getAmountOfVotes(target).call();
-       console.log(target);
+       const voted=await contract.methods.getVotedTarget(accounts[0]);
+       
+       if(voted==""){
+        console.log(target);
+        preList[a]=<div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{target}</h5>
+            <p class="card-text">
+              {amount}
+            </p>
+            <a href="#" onClick={()=>vote(target)} class="btn btn-primary">
+              vote
+            </a>
+          </div>
+        </div>
+        </div>;
+        setList(preList);
+       }else{
+        console.log(target);
        preList[a]=<div class="col-sm-4">
        <div class="card">
          <div class="card-body">
@@ -73,13 +113,16 @@ if(!state.error){
            <p class="card-text">
              {amount}
            </p>
-           <a href="#" onClick={()=>vote(target)} class="btn btn-primary">
-             vote
+           <a href="#" onClick={()=>revote(target)} class="btn btn-primary">
+             revote
            </a>
          </div>
        </div>
        </div>;
        setList(preList);
+       }
+
+       
        console.log(a);}
      };
      th();
