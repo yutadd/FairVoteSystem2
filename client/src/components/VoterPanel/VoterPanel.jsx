@@ -6,17 +6,17 @@ import "./style.css";
 import { useEffect } from "react";
 
 export const VoterPanel = () => {
-   let address, contract;
+   let address, contract,accounts;
    const state = { error: null };
-   var list=[];
+   const  [list,setList]=useState();
   const init = async () => {
     const artifact = require("../../contracts/Vote.json");
     const { abi } = artifact;
     let web3=null;
     try{
-      window.ethereum.request({ method: "eth_requestAccounts" })// Popup notify when metamask is not connected.
+    window.ethereum.request({ method: "eth_requestAccounts" })// Popup notify when metamask is not connected.
     web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-    const accounts = await web3.eth.requestAccounts();
+    accounts = await web3.eth.requestAccounts();
   } catch (err) {
     alert('Sorry sir, Can\'t init metamask or some web3 extension. Did you install it?');
     console.log('error '+ err.message+' happen');
@@ -34,30 +34,53 @@ if(!state.error){
     }
   }
   };
+  const vote=async (e)=>{
+    init();
+    const doe = async () => {
+      let suc;
+      try {
+          suc = await contract.methods.vote(e).send({ from: accounts[0] });
+          alert("transaction completed!");
+      } catch (e) {
+          if (e.code === 4001) {
+              alert("Cancelled");
+          } else if (e.code === "INVALID_ARGUMENT") {
+              alert("invalid address");
+          } else {
+              console.log("unknown error : " + e.code);
+          }
+      }
+      alert("success:" + suc); 
+  };
+  doe();
+  }
   useEffect(() => {
     init();
     setTimeout(() => {
       const th=async ()=>{
-        console.log(contract);
+      var preList=[];
+      console.log(contract);
        let i=await contract.methods.getTargetArrayLength().call();
        console.log(i);
        for(var a=0;a<i;a++){
-       const target=await contract.methods.getTargetDisplay(0).call();
+       const target=await contract.methods.getTargetDisplay(a).call();
+       const amount= await contract.methods.getAmountOfVotes(target).call();
        console.log(target);
-       list.push(<><div class="col-sm-4">
+       preList[a]=<div class="col-sm-4">
        <div class="card">
          <div class="card-body">
-           <h5 class="card-title">Special title treatment</h5>
+           <h5 class="card-title">{target}</h5>
            <p class="card-text">
-             With supporting text below as a natural lead-in to additional
-             content.
+             {amount}
            </p>
-           <a href="#" class="btn btn-primary">
-             {target}
+           <a href="#" onClick={()=>vote(target)} class="btn btn-primary">
+             vote
            </a>
          </div>
        </div>
-       </div></>);}
+       </div>;
+       setList(preList);
+       console.log(a);}
      };
      th();
      console.log(list);
@@ -76,7 +99,7 @@ if(!state.error){
         </div>
       </div>
       <div>
-      {list.map(num=> <Component>{num}</Component>)}
+      {list}
       </div>
       </>
   );

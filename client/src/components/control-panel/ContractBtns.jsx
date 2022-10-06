@@ -32,7 +32,7 @@ function ContractBtns({ setValue }) {
     useEffect(() => {
         init();
         if (!state.error) {
-            const th_a = setInterval(() => {
+             setInterval(() => {
                 getVoters();
             }, 1000);
         }
