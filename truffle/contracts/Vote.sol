@@ -84,7 +84,7 @@ contract Vote {
 	}
 	//this function is exist for fair voting.
 	function revote(string memory _target) public returns(bool){
-		if (keccak256(abi.encodePacked(voter[msg.sender])) == keccak256(abi.encodePacked(""))) {//revoteであることがあとからわかるように、revoteとvoteは別関数
+		if (keccak256(abi.encodePacked(voter[msg.sender])) != keccak256(abi.encodePacked(""))) {//revoteであることがあとからわかるように、revoteとvoteは別関数
 			bool _exist;
 			for (uint i = 0; i < targetList.length; i++) {
 				if (keccak256(abi.encodePacked(targetList[i])) == keccak256(abi.encodePacked(_target))) {

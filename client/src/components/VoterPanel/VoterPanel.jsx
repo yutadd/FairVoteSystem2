@@ -86,8 +86,7 @@ if(!state.error){
        for(var a=0;a<i;a++){
        const target=await contract.methods.getTargetDisplay(a).call();
        const amount= await contract.methods.getAmountOfVotes(target).call();
-       const voted=await contract.methods.getVotedTarget(accounts[0]);
-       
+       const voted=await contract.methods.getVotedTarget(accounts[0]).call();
        if(voted==""){
         console.log(target);
         preList[a]=<div class="col-sm-4">
@@ -105,7 +104,7 @@ if(!state.error){
         </div>;
         setList(preList);
        }else{
-        console.log(target);
+      console.log(target);
        preList[a]=<div class="col-sm-4">
        <div class="card">
          <div class="card-body">
