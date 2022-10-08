@@ -1,15 +1,60 @@
-# React client
+# FairVoteSystem
+ 
+前に作成されたリストをもとに、アドレスを生成し、addVoterしてください。
+どのアドレスが投票を行ったかはブロックチェーンエクスプローラーで確認できる。
+ブロックチェーン上では、アドレスと投票先以外が不可視なので、owner以外は投票と個人情報を紐づけられない。
+また、監視されている状況での投票を無効にできるように、reVoteが可能になっています。
+ 
+# DEMO
+ 
+comming soon...
+ 
+# Features
+ Voting to some IDs
 
-This project is bootstraped with [Create React App](https://create-react-app.dev). It is unopinionated with only `web3.js` as an added dependency, so nothing stands in your way.
-
-## Getting started
-
-Run `npm start` to start the dev server.
-
-See all [available scripts](https://create-react-app.dev/docs/available-scripts).
-
-## Note on `react-scripts` version
-
-The installed version of `react-scripts` is 4.x instead of the latest 5.x, which uses Webpack 5. This is because Webpack 5 no longer auto-polyfills Node.js core modules, which `web3.js` depends on.
-
-If you don't want to use `react-scripts` at 4.x, alternative solutions include [`eject`](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) and [`react-app-rewired`](https://github.com/timarney/react-app-rewired) (See [instruction](https://github.com/ChainSafe/web3.js#web3-and-create-react-app)).
+ 
+# Requirement
+ 
+"hoge"を動かすのに必要なライブラリなどを列挙する
+ 
+* huga 3.5.2
+* hogehuga 1.0.2
+ 
+# Installation
+ 
+Requirementで列挙したライブラリなどのインストール方法を説明する
+ 
+```bash
+pip install huga_package
+```
+ 
+# Usage
+ 
+DEMOの実行方法など、"hoge"の基本的な使い方を説明する
+ 
+```bash
+git clone https://github.com/hoge/~
+cd examples
+python demo.py
+```
+ 
+# Note
+ 
+注意点などがあれば書く
+ 
+# Author
+ 
+作成情報を列挙する
+ 
+* 作成者
+* 所属
+* E-mail
+ 
+# License
+ライセンスを明示する
+ 
+"hoge" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+ 
+社内向けなら社外秘であることを明示してる
+ 
+"hoge" is Confidential.
