@@ -1,4 +1,4 @@
-# FairVoteSystem
+# OpenSEC vote
  
 前に作成されたリストをもとに、アドレスを生成し、addVoterしてください。
 どのアドレスが投票を行ったかはブロックチェーンエクスプローラーで確認できる。
@@ -10,22 +10,27 @@
 comming soon...
  
 # Features
- Voting to some IDs
+This is transparency ensured voting system.
 
- 
 # Requirement
- 
-"hoge"を動かすのに必要なライブラリなどを列挙する
- 
-* huga 3.5.2
-* hogehuga 1.0.2
+global:
++-- create-next-app@12.3.0
++-- create-react-app@5.0.1
++-- ethernal@1.0.0
++-- ganache@7.4.3
++-- truffle@5.5.30
+`-- yarn@1.22.19
+client:
+    bootstrap
  
 # Installation
  
 Requirementで列挙したライブラリなどのインストール方法を説明する
  
 ```bash
-pip install huga_package
+npm install -g <global_package>
+cd client/
+npm install <client_package>
 ```
  
 # Usage
@@ -33,28 +38,21 @@ pip install huga_package
 DEMOの実行方法など、"hoge"の基本的な使い方を説明する
  
 ```bash
-git clone https://github.com/hoge/~
-cd examples
-python demo.py
+cd truffle
+ganache
+truffle console
+cd ../client
+npm start
 ```
  
 # Note
  
-注意点などがあれば書く
+npm audit fixを行えという脆弱性の報告とかあるらしいが、正確でないため無視して良いらしい。
  
 # Author
- 
-作成情報を列挙する
- 
-* 作成者
-* 所属
-* E-mail
+* yutadd
  
 # License
 ライセンスを明示する
  
 "hoge" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
- 
-社内向けなら社外秘であることを明示してる
- 
-"hoge" is Confidential.
