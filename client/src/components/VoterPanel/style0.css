@@ -1,0 +1,14 @@
+@media (min-width: 500px) {
+  .col-sm-4 {
+    display: inline-block;
+    padding-left: 1vh;
+    
+    padding-top: 1vh;
+  }
+  .hint{
+    color:black;
+  }
+  .hint:hover{
+    color:black;
+  }
+}

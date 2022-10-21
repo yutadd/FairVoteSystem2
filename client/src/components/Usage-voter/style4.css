@@ -1,0 +1,8 @@
+@media (min-width: 500px) {
+    .padding2{
+      padding-left:5vh;
+    }
+    .howto{
+        font-size:2vh;
+    }
+  }

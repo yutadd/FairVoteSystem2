@@ -2,7 +2,7 @@
 import { Component, useState } from "react";
 import Web3 from "web3";
 
-import "./style.css";
+import "./style0.css";
 import { useEffect } from "react";
 
 export const VoterPanel = () => {
@@ -130,16 +130,19 @@ if(!state.error){
   },[]);
   return (<>
       <div className="start-container background ">
-        <a className="menu-link" aria-current="page" href="#">
+        <a className="menu-link" aria-current="page" href="/">
           <img className="logo" src="/logo2.png" />
         </a>
         <span className="menu-link title-text">OpenSEC Vote</span>
         <div className="admin-button inline">
-          <a className="btn btn-warning" href="admin">
-            管理者用ページ
+          <a className="btn btn-primary" href="admin">
+            Admin page
           </a>
         </div>
       </div>
+      <a href="/usage_v" className="hint">
+        <img src="hatena.png" alt="?" />Usage for voter.
+      </a>
       <div>
       {list}
       </div>

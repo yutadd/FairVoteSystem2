@@ -1,6 +1,6 @@
 {
-  "short_name": "Truffle Box",
-  "name": "React Truffle Box",
+  "short_name": "Vote",
+  "name": "OpenSEC Vote",
   "icons": [
     {
       "src": "favicon.ico",

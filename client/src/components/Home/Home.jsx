@@ -1,25 +1,25 @@
-import "./style.css";
+import "./style1.css";
 export const Home = () => {
   return (
     <div>
       <div className="start-container background ">
-        <a className="menu-link" aria-current="page" href="#">
+        <a className="menu-link" aria-current="page" href="/">
           <img className="logo" src="/logo2.png" />
         </a>
         <span className="menu-link title-text">OpenSEC Vote</span>
         <div className="admin-button inline">
-          <a className="btn btn-warning" href="admin">
-            管理者用ページ
+          <a className="btn btn-primary" href="admin">
+            Admin Page
           </a>
         </div>
         <br />
         <div className="left">
           <div className="discription">
-            <div className="discription-title">透明性・可用性</div>
+            <div className="discription-title">Advanced voting system</div>
             <div className="discription-text">
-              誰でも簡単に投票し、誰でも簡単に不正を監視することができ、
+              Transparency + Availability + Usability
               <br />
-              reVoteができる公平な投票システム。
+              You can check all activity on BlockChain.
             </div>
           </div>
           <div className="btn-container">
@@ -31,14 +31,14 @@ export const Home = () => {
               </div>
               <br />
             </div>
-            <a href="" className="btn-explanation">
+            <a href="/usage_v" className="btn-explanation">
               {" "}
-              <img src="hatena.png" alt="?" /> 使い方
+              <img src="hatena.png" alt="?" /> Usage for voter.
             </a>
             <br />
             <a href="" className="btn-explanation">
               {" "}
-              推奨環境: edge, chrome or firefox
+              Recommended env: edge, chrome or firefox
             </a>
           </div>
         </div>
