@@ -11,8 +11,8 @@ export const Admin = () => {
       <div className="welcome">
         <h1 className="padding">Control Panel</h1>
         <p className="padding">
-          This is transparency ensured voting system. Please check MetaMask is
-          installed on your browser. author is yutadd.
+        The control panel allows anyone to view current information for monitoring purposes, <br />
+         and administrators can manipulate the voting system.
           <br />
           usage -&gt;<a href="/usage_a">usage for admin</a>.
           <br />
