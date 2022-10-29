@@ -2,13 +2,13 @@
   .col-sm-4 {
     display: inline-block;
     padding-left: 1vh;
-    
+
     padding-top: 1vh;
   }
-  .hint{
-    color:black;
+  .hint {
+    color: black;
   }
-  .hint:hover{
-    color:black;
+  .hint:hover {
+    color: black;
   }
 }

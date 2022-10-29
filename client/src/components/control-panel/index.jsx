@@ -3,7 +3,7 @@ import { useState } from "react";
 import Contract from "./Contract";
 import ContractBtns from "./ContractBtns";
 function Demo() {
-const [values, setValue] = useState({
+  const [values, setValue] = useState({
     closed: "?",
     voters: {},
     targets: {},
@@ -20,12 +20,6 @@ const [values, setValue] = useState({
     </>
   );
 
-  return (
-    <div className="demo">
-      {
-        demo
-      }
-    </div>
-  );
+  return <div className="demo">{demo}</div>;
 }
 export default Demo;

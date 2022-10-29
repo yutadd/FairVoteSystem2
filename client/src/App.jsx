@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home } from "./components/Home/Home";
 import { Admin } from "./components/Admin/Admin";
 import { VoterPanel } from "./components/VoterPanel/VoterPanel";
-import {Usage_v} from "./components/Usage-voter/Usage";
-import {Usage_a} from "./components/Usage-admin/Usage"
+import { Usage_v } from "./components/Usage-voter/Usage";
+import { Usage_a } from "./components/Usage-admin/Usage";
 
 function App() {
   return (
