@@ -7,47 +7,7 @@ import { useEffect } from "react";
 
 export const VoterPanel =() => {
   const [list, setList] = useState();
-  /*const vote = async (e) => {
-    init();
-    const doe = async () => {
-      let suc;
-      try {
-        suc = await contract.methods.vote(e).send({ from: accounts[0] });
-        alert("transaction completed!");
-      } catch (e) {
-        if (e.code === 4001) {
-          alert("Cancelled");
-        } else if (e.code === "INVALID_ARGUMENT") {
-          alert("invalid address");
-        } else {
-          console.log("unknown error : " + e.code);
-        }
-      }
-      alert("Voted to " + e);
-    };
-    doe();
-  };
-  const revote = async (e) => {
-    init();
-    const doe = async () => {
-      let suc;
-      try {
-        suc = await contract.methods.revote(e).send({ from: accounts[0] });
-        alert("transaction completed!");
-        console.log(suc);
-      } catch (e) {
-        if (e.code === 4001) {
-          alert("Cancelled");
-        } else if (e.code === "INVALID_ARGUMENT") {
-          alert("invalid address");
-        } else {
-          console.log("unknown error : " + e.code);
-        }
-      }
-      alert("reVoted to " + e);
-    };
-    doe();
-  };*/const load=async ()=>{
+  const load=async ()=>{
         let address, contract, accounts;
         const state = { error: null };
         const artifact = require("../../contracts/Vote.json");
